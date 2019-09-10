@@ -1,24 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
-function App() {
+const App = () => {
+  const [teachers, setTeachers] = useState([]);
+
+  fetch('http://localhost:3000/teachers').then((res) => {
+    return res.json();
+  }).then((res) => {
+    setTeachers(res);
+  });
+
+  const renderTeachers = () => {
+    const renderedTeachers = [];
+
+    for (let i = 0; i < teachers.length; i++) {
+      const currentTeacher = teachers[i];
+      const renderedTeacher = (
+        <div key={currentTeacher.id}>
+          <p>{currentTeacher.firstName} {currentTeacher.lastName}</p>
+        </div>
+      );
+
+      renderedTeachers.push(renderedTeacher);
+    }
+
+    return renderedTeachers;
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Hello World</h1> 
+      {renderTeachers()}
     </div>
   );
 }
