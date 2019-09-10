@@ -10,20 +10,13 @@ const App = () => {
   });
 
   const renderTeachers = () => {
-    const renderedTeachers = [];
-
-    for (let i = 0; i < teachers.length; i++) {
-      const currentTeacher = teachers[i];
-      const renderedTeacher = (
-        <div key={currentTeacher.id}>
-          <p>{currentTeacher.firstName} {currentTeacher.lastName}</p>
+    return teachers.map((teacher) => {
+      return (
+        <div key={teacher.id}>
+          <p>{teacher.firstName} {teacher.lastName}</p>
         </div>
       );
-
-      renderedTeachers.push(renderedTeacher);
-    }
-
-    return renderedTeachers;
+    });
   };
 
   return (
